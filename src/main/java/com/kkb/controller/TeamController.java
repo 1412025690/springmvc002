@@ -35,7 +35,7 @@ public class TeamController {
         return mv;
     }
 
-    @RequestMapping("hello.do")
+    @RequestMapping("hello")
     public ModelAndView hello() {
         System.out.println("TeamController----add----");
         teamService.add();
