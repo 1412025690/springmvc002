@@ -11,6 +11,19 @@
     <title>hello</title>
 </head>
 <body>
+
+  <h3>3.请求参数和方法名称不一致</h3>
+  <form action="/param/text03" method="post">
+    球队id:  <input type="text" name="teamId" /><br/>
+    球队名称: <input type="text" name="teamName" /><br/>
+    球队位置: <input type="text" name="Location" /><br/>
+    <button type="submit">提交</button>
+  </form>
+
+  <br/>
+  <br/>
+  <br/>
+
   <h3>2.使用对象接收多个参数</h3>
   <form action="/param/text02" method="post">
     球队id:  <input type="text" name="teamId" /><br/>

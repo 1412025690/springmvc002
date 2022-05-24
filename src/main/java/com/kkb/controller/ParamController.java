@@ -3,11 +3,37 @@ package com.kkb.controller;
 import com.kkb.pojo.Team;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping("param")
 public class ParamController {
+
+
+
+    /**
+     * 3.请求参数和方法名称不一致
+     *  RequestParam 矫正参数名
+     *      解决方案 :
+     *          value : 属性表示请求的参数名
+     *          required : 表示参数是否必须 默认为true 必须赋值不赋值报错400
+     *                     如果为false 则不会报错 结果为空
+     * @param
+     * @return
+     */
+    @RequestMapping("text03")
+    public ModelAndView text03(@RequestParam(value = "teamId",required = false) Integer id,
+                               @RequestParam("teamName")String name,
+                               @RequestParam("Location")String loc) {
+        System.out.println("text03----------");
+        System.out.println("teamId:"+id);
+        System.out.println("teamName:"+name);
+        System.out.println("Location:"+loc);
+        return new ModelAndView("ok");
+    }
+
+
 
     /**
      * 2.使用对象接收参数: 要求用户请求中的参数名称必须与实体类的属性一致 否则 获取不到(值为: null)
