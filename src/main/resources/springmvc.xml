@@ -14,7 +14,11 @@
 
     <!-- 视图解析器 -->
     <bean id="internalResourceViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <property name="prefix" value="/" />
+        <property name="prefix" value="/jsp/" />
         <property name="suffix" value=".jsp" />
     </bean>
+    <!-- 检测静态资源 如果有 就放行 让默认的servlet处理 -->
+    <mvc:default-servlet-handler />
+    <!-- springMVC 3.0 版本之后的控制器 专门用来处理静态资源 : ResourceHttpRequestHandler -->
+    <!--<mvc:resources mapping="/images/**" location="/images/" />-->
 </beans>
