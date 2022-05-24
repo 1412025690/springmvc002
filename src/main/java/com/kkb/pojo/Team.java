@@ -1,9 +1,19 @@
 package com.kkb.pojo;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.util.Date;
+
 public class Team {
     private Integer teamId;
     private String teamName;
     private String Location;
+    /**
+     * 日期格式 yyyy-MM-dd HH:mm:ss
+     * @DateTimeFormat 时间格式转换注解
+     */
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date createTime;
 
 
     @Override
@@ -12,7 +22,16 @@ public class Team {
                 "teamId=" + teamId +
                 ", teamName='" + teamName + '\'' +
                 ", Location='" + Location + '\'' +
+                ", createTime=" + createTime +
                 '}';
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 
     public Integer getTeamId() {
