@@ -1,6 +1,0 @@
-com\kkb\pojo\Team.class
-com\kkb\controller\TeamController.class
-com\kkb\vo\QueryVO.class
-com\kkb\controller\ParamController.class
-com\kkb\controller\ResultController.class
-com\kkb\service\TeamService.class

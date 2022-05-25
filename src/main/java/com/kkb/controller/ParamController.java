@@ -17,9 +17,6 @@ import java.util.List;
 @RequestMapping("param")
 public class ParamController {
 
-
-
-
     @RequestMapping("text09")
     public ModelAndView text09(QueryVO vo) {
         System.out.println("text09----------");
@@ -64,7 +61,7 @@ public class ParamController {
 
 
     /**
-     * 6.获取日期类型的参数
+     * 6.获取日期类型的参数 :  实体类中对应的属性上必须有注解 @DateTimeFormat(pattern = "yyyy-MM-dd")
      * @param team
      * @return
      */

@@ -1,5 +1,6 @@
 package com.kkb.pojo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
@@ -12,7 +13,8 @@ public class Team {
      * 日期格式 yyyy-MM-dd HH:mm:ss
      * @DateTimeFormat 时间格式转换注解
      */
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")     //处理器获取日期类型参数时加
+    @JsonFormat(pattern = "yyyy-MM-dd hh:MM:ss",timezone = "GMT+8") //JSON格式返回给前端的时候添加
     private Date createTime;
 
 
