@@ -39,9 +39,12 @@
                 URL:"/team/"+$("#teamId").val(), //REST ful风格的API去定义
                 data: "&_method=DELETE", //表单的所有数据以 ? & 形式追加在url后面 /team?teamId=1006 & teamName = kuaichuan & location = las
                 dataType:"json",
-                success:function (msg) {
-                    // alert("Data Saved: " + msg);
-                    $("#showResult").html(msg);
+                success:function (vo) {
+                    if(vo.code == 200){
+                        $("#showResult").html("删除成功");
+                    }else {
+                        $("#showResult").html(vo.msg);
+                    }
                 }
             });
         });
@@ -56,9 +59,12 @@
                 URL:"/team/"+$("#teamId").val(), //REST ful风格的API去定义
                 data: $("#myForm").serialize()+"&_method=PUT", //表单的所有数据以 ? & 形式追加在url后面 /team?teamId=1006 & teamName = kuaichuan & location = las
                 dataType:"json",
-                success:function (msg) {
-                    // alert("Data Saved: " + msg);
-                    $("#showResult").html(msg);
+                success:function (vo) {
+                    if(vo.code == 200){
+                        $("#showResult").html("更新成功");
+                    }else {
+                        $("#showResult").html(vo.msg);
+                    }
                 }
             });
         });
@@ -76,8 +82,11 @@
                 data: $("#myForm").serialize(), //表单的所有数据以 ? & 形式追加在url后面 /team?teamId=1006 & teamName = kuaichuan & location = las
                 dataType:"json",
                 success:function (msg) {
-                    // alert("Data Saved: " + msg);
-                    $("#showResult").html(msg);
+                    if(vo.code == 200){
+                        $("#showResult").html("添加成功");
+                    }else {
+                        $("#showResult").html(vo.msg);
+                    }
                 }
             });
         });
@@ -95,31 +104,58 @@
                         var list = vo.list;
                         var str = "";
                         for(var i=0;i<list.length;i++){
-                         var obj = list[i];
-                         str += obj.teamId + "---" + obj.teamName + "----" + obj.location + "<br/>";
+                            var obj = list[i];
+                            str += obj.teamId + "---" + obj.teamName + "----" + obj.location + "<br/>";
                         }
-                        $(#showResult).html(str);
+                        $("#showResult").html(str);
                     }else {
-                        $(#showResult).html(vo.msg);
+                        $("#showResult").html(vo.msg);
                     }
                 }
             });
         });
 
-        //给 查询单个GET 绑定单击事件
+        // //给 查询单个GET 绑定单击事件
+        // $("#btnGetOne").click(function () {
+        //     //发起异步ajax请求
+        //     $.ajax({
+        //         type:"GET",
+        //         URL:"team/"+$("#teamId").val(), //REST ful风格的API去定义
+        //         data:"",
+        //         dataType:"json",
+        //         success:function (vo) {
+        //             if(vo.code == 200){
+        //                 var obj = vo.obj;
+        //                 if(obj == ""){
+        //                     $("#showResult").html("没有查询到数据");
+        //                 }else {
+        //                     $("#showResult").html(obj.teamId + "," + obj.teamName + "," + obj.location + "<br/>");
+        //                 }
+        //             }else {
+        //                 $("#showResult").html(vo.msg);
+        //             }
+        //         }
+        //     });
+        // });
+        //给 查询单个GET 按钮绑定单击事件
         $("#btnGetOne").click(function () {
-            //发起异步ajax请求
+            console.log("btnGetOne");
+            //发起异步请求
             $.ajax({
-                type:"GET",
-                URL:"team/"+$("#teamId").val(), //REST ful风格的API去定义
-                data:"",
+                type: "GET",
+                url: "/team/"+$("#teamId").val(), //RESTful风格的API定义
+                data: "",
                 dataType:"json",
-                success:function (obj) {
-                    alert("Data Saved: " + obj);
-                    if(obj == ""){
-                        $("#showResult").html("没有查询到数据");
-                    }else {
-                        $("#showResult").html(obj.teamId + "," + obj.teamName + "," + obj.location + "<br/>");
+                success: function(vo){
+                    if(vo.code==200){
+                        var obj=vo.obj;
+                        if(obj==""){
+                            $("#showResult").html("没有复合条件的数据！");
+                        }else {
+                            $("#showResult").html(obj.teamId + "----" + obj.teamName + "----" + obj.location + "<br/>");
+                        }
+                    }else{
+                        $("#showResult").html(vo.msg);
                     }
                 }
             });

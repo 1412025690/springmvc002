@@ -1,6 +1,7 @@
 package com.kkb.controller;
 
 import com.kkb.pojo.Team;
+import com.kkb.vo.AjaxResultVO;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,17 +35,15 @@ public class RestfulController {
      */
     @RequestMapping(value = "/team/{id}",method = RequestMethod.DELETE)
     @ResponseBody
-    public String del(@PathVariable("id")int id){
+    public AjaxResultVO<Team> del(@PathVariable("id")int id){
         System.out.println("删除DELETE---发起的请求----------");
         for (Team team : teamList) {
             if(team.getTeamId()==id){
                 teamList.remove(team);
-                return "204";
+                return new AjaxResultVO<>();
             }
         }
-
-
-        return "500";
+        return new AjaxResultVO<>(404,"球队不存在");
     }
 
 
@@ -54,7 +53,7 @@ public class RestfulController {
      */
     @RequestMapping(value = "/team/{id}",method = RequestMethod.PUT)
     @ResponseBody
-    public String add(@PathVariable("id")int id,Team team){
+    public AjaxResultVO<Team> add(@PathVariable("id")int id,Team team){
         System.out.println("更新PUT---发起的请求----------");
         teamList.add(team);
 
@@ -62,10 +61,10 @@ public class RestfulController {
             if(team1.getTeamId() == id){
                 team.setLocation(team.getLocation());
                 team1.setTeamName(team.getTeamName());
-                return "200";
+                return new AjaxResultVO<Team>();
             }
         }
-        return "400";
+        return new AjaxResultVO<>(500,"更新失败");
     }
 
 
@@ -75,10 +74,10 @@ public class RestfulController {
      */
     @RequestMapping(value = "/team",method = RequestMethod.POST)
     @ResponseBody
-    public String add(Team team){
+    public AjaxResultVO<Team> add(Team team){
         System.out.println("添加POST---发起的请求----------");
         teamList.add(team);
-        return "201";
+        return new AjaxResultVO<>(200,"ok");
     }
 
     /**
@@ -87,9 +86,9 @@ public class RestfulController {
      */
     @ResponseBody
     @RequestMapping(value = "/teams",method = RequestMethod.GET)
-    public List<Team> getAll(){
+    public AjaxResultVO<Team> getAll(){
         System.out.println("查询所有GET按钮---发起的请求----------");
-        return teamList;
+        return new AjaxResultVO<>(200,"ok",teamList);
     }
 
     /**
@@ -98,11 +97,11 @@ public class RestfulController {
      */
     @ResponseBody
     @RequestMapping(value = "/team/{id}",method = RequestMethod.GET)
-    public Team getOne(@PathVariable("id")int id){
+    public AjaxResultVO<Team> getOne(@PathVariable("id")int id){
         System.out.println("查询单个GET---发起的请求---------");
         for (Team team:teamList) {
             if(team.getTeamId() == id){
-                return team;
+                return new AjaxResultVO<>(200,"ok",team);
             }
         }
         return null;
