@@ -4,7 +4,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 /**
  * springMVC导航的方式
@@ -12,7 +16,6 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 @RequestMapping("navigation")
 public class NavigationController {
-
     //3-1.转发到控制器
     @RequestMapping("text03-1")
     public ModelAndView test03_1() {

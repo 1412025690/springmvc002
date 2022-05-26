@@ -9,7 +9,7 @@
 <html>
 <head>
     <title>Result</title>
-    <script src="/js/jquery-1.11.1.js"></script>
+    <script src="/js/jquery-3.6.0.js"></script>
 </head>
 <body>
 <h1>Result--------</h1>

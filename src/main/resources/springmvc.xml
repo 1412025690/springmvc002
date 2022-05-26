@@ -22,4 +22,29 @@
     <mvc:default-servlet-handler />
     <!-- springMVC 3.0 版本之后的控制器 专门用来处理静态资源 : ResourceHttpRequestHandler -->
     <!--<mvc:resources mapping="/images/**" location="/images/" />-->
+
+    <!-- 配置拦截器 -->
+    <mvc:interceptors>
+        <!-- 按顺序配置多个拦截器 -->
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/> <!-- path : 拦截器作用域 -->
+            <bean class="com.kkb.interceptor.myInterceptor" id="myInterceptor"></bean>
+        </mvc:interceptor>
+
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/> <!-- path : 拦截器作用域 -->
+            <bean class="com.kkb.interceptor.myInterceptor2" id="myInterceptor2"></bean>
+        </mvc:interceptor>
+
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/> <!-- path : 拦截器作用域 -->
+            <bean class="com.kkb.interceptor.FileInterceptor" id="FileInterceptor"></bean>
+        </mvc:interceptor>
+    </mvc:interceptors>
+
+    <!-- 文件上传 -->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="maxUploadSize" value="5242880" />  <!-- 文件上传大小限制 单位:字节(B) 5M : 1024*1024*5 1M=1024kb 1kb=1024B -->
+        <property name="defaultEncoding" value="UTF-8" /> <!-- 编码格式 -->
+    </bean>
 </beans>
